@@ -75,6 +75,7 @@ const getResults= e => {
   e.preventDefault()
 
   let inputDate= new Date(2022, month.value, date.value)
+  console.log(inputDate)
 
   //get differences within 90 day window, can result in non-integer diff due
   //  to daylight savings, but this should not effect results since we perform no
@@ -110,6 +111,43 @@ const getResults= e => {
 //get input date
 form.addEventListener('submit', getResults)
 
+
+//bonus functions
+const findExtrema= () => {
+  let truncHolidays= holidays.slice(7, holidays.length)
+  let dateS= new Date(2022,0,1)
+  let results={}
+
+  while(dateS.getFullYear() === 2022){
+    let score= 0
+    let next
+    let toRemove= 0
+
+    for(let i=0; i<truncHolidays.length; i++){
+      let diff= (truncHolidays[i] - dateS) / (1000 * 60 * 60 * 24)
+      if(diff > 90){
+        next= truncHolidays[i]
+        console.log(next.toDateString())
+        break
+      }
+
+      if(diff < 0){
+        toRemove++
+      } else {
+        score+= (diff <= 60 ? (diff <= 30 ? 10 : 5) : 1)
+      }
+    }
+
+    if(!next){break}
+
+    results[score] = dateS
+    dateS= new Date(next.setDate(next.getDate() - 90))
+    console.log(dateS.toDateString() + '\n')
+    truncHolidays= truncHolidays.slice(toRemove, truncHolidays.length)
+  }
+
+  console.log(results)
+}
 
 
 
