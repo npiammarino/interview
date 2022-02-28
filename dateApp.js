@@ -13,6 +13,31 @@ const months= {
   11: ["December", "31"],
 }
 
+const holidays=[
+  new Date(2021, 10, 24), //November 24-25: Thanksgiving Break (2 days)
+  new Date(2021, 10, 25),
+  new Date(2021, 11, 26), //December 26-30: Holiday Break (5 days)
+  new Date(2021, 11, 27),
+  new Date(2021, 11, 28),
+  new Date(2021, 11, 29),
+  new Date(2021, 11, 30),
+  new Date(2022, 1, 21), //February 21: Washington's Birthday
+  new Date(2022, 3, 15), //April 15: Good Friday
+  new Date(2022, 4, 30), //May 30: Memorial Day
+  new Date(2022, 5, 20), //June 20: Juneteenth
+  new Date(2022, 6, 4), //July 4: Independence Day
+  new Date(2022, 8, 5), //September 5: Labor Day
+  new Date(2022, 9, 10), //October 10: Columbus Day
+  new Date(2022, 10, 24), //November 24-25: Thanksgiving Break (2 days)
+  new Date(2022, 10, 25),
+  new Date(2022, 11, 26), //December 26-30: Holiday Break (5 days)
+  new Date(2022, 11, 27),
+  new Date(2022, 11, 28),
+  new Date(2022, 11, 29),
+  new Date(2022, 11, 30),
+  new Date(2023, 1, 21), //February 21: Washington's Birthday
+]
+
 var month= document.getElementById("month")
 var date= document.getElementById("date")
 var form= document.getElementById("date-form")
@@ -42,6 +67,18 @@ month.addEventListener("change", e => {
   populateDate(m)
 
 })
+
+//calculate results
+const getResults= e => {
+  e.preventDefault()
+
+  let inputDate= new Date(2022, month.value, date.value)
+  console.log(inputDate)
+}
+
+//get input date
+form.addEventListener('submit', getResults)
+
 
 
 
