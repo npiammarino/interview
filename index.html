@@ -8,24 +8,26 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h2>Closest Holiday</h2>
-    </header>
-    <form id="date-form">
-      <div class="form-cont">
-        <label>Enter Month</label>
-        <select id="month"></select>
+  <div id="container">
+    <div id="main">
+      <header>
+        <h2>Closest Holiday</h2>
+      </header>
+      <form id="date-form">
+        <div class="form-cont">
+          <label>Enter Month</label>
+          <select id="month"></select>
+        </div>
+        <div class="form-con">
+          <label>Enter Date</label>
+          <select id="date"></select>
+        </div>
+        <button id="submit" type="submit">Results</button>
+      </form>
+      <div id="result">
+        <p id="closest"></p>
+        <p id="happiness"></p>
       </div>
-      <div class="form-con">
-        <label>Enter Date</label>
-        <select id="date"></select>
-      </div>
-      <button id="submit" type="submit">Find Closest Holiday</button>
-    </form>
-    <div id="result">
-      <p id="closest">test</p>
-      <p id="happiness">test</p>
     </div>
   </div>
 <script src='./dateApp.js'></script>
