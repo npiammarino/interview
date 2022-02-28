@@ -41,6 +41,8 @@ const holidays=[
 var month= document.getElementById("month")
 var date= document.getElementById("date")
 var form= document.getElementById("date-form")
+var closestDate= document.getElementById("closest")
+var happinessScore= document.getElementById("happiness")
 
 
 //populate select boxes
@@ -73,7 +75,36 @@ const getResults= e => {
   e.preventDefault()
 
   let inputDate= new Date(2022, month.value, date.value)
-  console.log(inputDate)
+
+  //get differences within 90 day window, can result in non-integer diff due
+  //  to daylight savings, but this should not effect results since we perform no
+  //  arithmatic with this value
+  let diffs= {}
+  holidays.forEach( h => {
+    let diff= (h- inputDate) / (1000 * 60 * 60 * 24)
+    if(Math.abs(diff) <= 90){
+      diffs[diff]= h
+    }
+  })
+
+  //get score and closest
+  let keySet= Object.keys(diffs)
+  let closest= 90
+  let score= 0
+
+  for(let i=0; i <= keySet.length; i++){
+    let diff= keySet[i]
+
+    if(Math.abs(diff) < Math.abs(closest)){//improve this
+      closest= diff
+    }
+    if(diff >= 0){
+      score+= (diff <= 60 ? (diff <= 30 ? 10 : 5) : 1)
+    }
+  }
+  console.log(diffs)
+  closestDate.innerHTML= "Closest Holiday: " + diffs[closest].toLocaleDateString()
+  happinessScore.innerHTML= "Happiness Score: " + score.toString()
 }
 
 //get input date
